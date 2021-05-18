@@ -1,0 +1,58 @@
+<scroll-view style="height:calc(100vh - 80rpx)" scroll-y>
+  <swiper class="imagesSwiper" indicator-dots autoplay circular>
+    <swiper-item wx:for="{{data.image}}" wx:key="item" class="images">
+      <image class="image" src="{{item}}" id="{{index}}" mode="aspectFill" bindtap="preview"></image>
+    </swiper-item>
+  </swiper>
+  <view class="area">
+    <view class="title">{{data.title}}</view>
+    <view class="title flex justify-between  align-end">
+      <view class="price">
+        <view class="target">{{data.target}}</view>
+        <view class="now">{{data.now}}</view>
+      </view>
+      <view class="sellDate" style="color:gray">{{data.sellDate}}</view>
+    </view>
+  </view>
+  <view class="area">
+    <view wx:if="{{data.RealNameApp}}" class="cu-list flex justify-between padding-xs"
+      style="height:120rpx;margin-top:0">
+      <view>
+        <view class="avatar cu-avatar round lg" style="background-image:url({{data.applicant.userInfo.avatarUrl}});">
+        </view>
+        <view class="name">{{data.applicant.moreInfo.realName}}</view>
+        <view class="school">{{data.applicant.moreInfo.school}}</view>
+      </view>
+      <view style="justify-items: center;">
+        <view class="label cu-btn bg-blue shadow">
+          实名
+        </view>
+      </view>
+    </view>
+    <view wx:if="{{!data.RealNameApp}}" class="cu-list padding-xs" style="height:120rpx">
+      <view>
+        <view class="avatar cu-avatar round lg" style="background-image:url({{data.applicant.userInfo.avatarUrl}});">
+        </view>
+        <view class="name">{{data.applicant.userInfo.nickName}}</view>
+        <view class="school">非实名</view>
+      </view>
+    </view>
+  </view>
+  <view class="area">
+    <view class="date">
+      <text style="font-weight:800;">截止日期</text>
+      ：{{data.date}}
+    </view>
+    <view class="date">
+      <text style="font-weight:800;">申请日期</text>
+      ：{{data.applyDate}}
+    </view>
+  </view>
+  <view class="area description" style="min-height:calc(100vh - 1100rpx)">
+    <view>{{data.description}}</view>
+  </view>
+</scroll-view>
+<button wx:if="{{state==0}}" class="cu-btn bg-blue lg" bindtap="buyBtn"
+  style="width:750rpx;border-radius: 0;">资助</button>
+<button wx:if="{{state==1}}" class="cu-btn bg-orange lg" bindtap="cancelBtn"
+  style="width:750rpx;border-radius: 0;">撤销众筹项目</button>

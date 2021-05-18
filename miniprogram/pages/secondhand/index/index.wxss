@@ -1,0 +1,114 @@
+.onloading {
+  font-size: 64rpx;
+  margin-left: 250rpx;
+  margin-top: 200rpx;
+}
+
+.onloading .loadImage {
+  display: inline;
+}
+
+.onloading .loadImage::after {
+  margin-top: 13rpx;
+  margin-right: 12rpx;
+  width: 64rpx;
+  height: 64rpx;
+  line-height: 64rpx;
+  font-size: 64rpx;
+}
+
+#saleBtn {
+  width: 750rpx;
+  border-radius: 0;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+}
+
+.saleInfo {
+  padding: 0;
+  width: 750rpx;
+  height: calc(100vh - 64rpx);
+  justify-content: center;
+}
+
+.merchandises {
+  width: 375rpx;
+}
+
+.left,
+.right{
+  margin-bottom: 74rpx;
+}
+
+.left {
+  width: 375rpx;
+  float: left;
+}
+
+.right {
+  width: 375rpx;
+  float: right;
+}
+
+.left .merchandises {
+  float: left;
+}
+
+.right .merchandises {
+  float: right;
+}
+
+.cu-card>.cu-item {
+  margin: 0;
+  margin-top: 10rpx;
+  margin-left: 10rpx;
+}
+
+.merchandisesMain {
+  width: 360rpx;
+  box-shadow: 5rpx 5rpx 5rpx #ccc;
+}
+
+.bg-shadeBottom {
+  min-height: 60rpx;
+  background-image: linear-gradient(rgba(50, 50, 50, 0.01), rgba(50, 50, 50, 1));
+  font-size: 32rpx;
+  font-weight: 500;
+}
+
+.price .salePrice {
+  color: #c90000;
+  font-size: 60rpx;
+  text-shadow: 2rpx 2rpx 2rpx #5e0000;
+  height: 90rpx;
+}
+
+.price .salePrice::before {
+  content: "￥";
+  font-size: 40rpx;
+}
+
+.price .purPrice {
+  margin-left: 20rpx;
+  color: gray;
+  text-decoration: line-through;
+}
+
+.brief {
+  color: gray;
+  padding-left: 8rpx;
+  font-size: 28rpx;
+}
+
+.brief .text {
+  height: 115rpx;
+}
+
+.date {
+  font-size: 24rpx;
+  text-align: right;
+  color: gray;
+  margin-right: 10rpx;
+  margin-bottom: 10rpx;
+}

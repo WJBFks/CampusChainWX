@@ -1,0 +1,10 @@
+<!-- 顶部 -->
+<view class="ellipse bg-blue">
+  <view class=" header">
+    <view class="infor">
+      <image class="avatar" src="{{user.userInfo.avatarUrl}}" mode="aspectFill"></image>
+      <view class="name">{{user.userInfo.nickName}}</view>
+      <view class="detail">{{user.moreInfo.school}}</view>
+    </view>
+  </view>
+</view>

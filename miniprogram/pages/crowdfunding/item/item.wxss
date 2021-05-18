@@ -1,0 +1,73 @@
+.imagesSwiper,
+.image {
+  width: 750rpx;
+  height: 421.875rpx;
+}
+
+.main {
+  border-top: #eeeeee solid 1rpx;
+}
+
+.target {
+  color: #c90000;
+  font-size: 48rpx;
+  text-shadow: 2rpx 2rpx 2rpx #5e0000;
+  height: 60rpx;
+}
+
+.target::before {
+  content: "目标：￥";
+  font-size: 28rpx;
+}
+
+.now {
+  font-size: 48rpx;
+  color: gray;
+}
+
+.now::before {
+  content: "当前：￥";
+  font-size: 28rpx;
+}
+
+.title {
+  font-size: 64rpx;
+  color: black;
+}
+
+.description {
+  margin-top: 32rpx;
+}
+
+.area {
+  background-color: white;
+  margin-bottom: 24rpx;
+  padding: 20rpx;
+}
+
+.description {
+  margin: 0;
+}
+
+.avatar {
+  box-shadow: #aaa 0rpx 0rpx 10rpx;
+}
+
+.name {
+  margin-left: 120rpx;
+  margin-top: -95rpx;
+  font-size: 36rpx;
+}
+
+.school {
+  margin-left: 120rpx;
+  margin-top: 10rpx;
+  font-size: 28rpx;
+}
+
+.label {
+  border-radius: 20rpx;
+  width: 120rpx;
+  height: 60rpx;
+  margin-top: 20rpx;
+}

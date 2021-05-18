@@ -1,0 +1,51 @@
+{
+  "pages": [
+    "pages/login/index/index",
+    "pages/secondhand/index/index",
+    "pages/secondhand/sell/sell",
+    "pages/secondhand/item/item",
+    "pages/mine/index/index",
+    "pages/crowdfunding/index/index",
+    "pages/crowdfunding/apply/apply",
+    "pages/crowdfunding/item/item",
+    "pages/more/index/index"
+  ],
+  "window": {
+    "backgroundColor": "#F6F6F6",
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#0081ff",
+    "navigationBarTitleText": "链上校园",
+    "navigationBarTextStyle": "white"
+  },
+  "tabBar": {
+    "color": "#515151",
+    "selectedColor": "#1296db",
+    "list": [{
+        "pagePath": "pages/secondhand/index/index",
+        "text": "二手交易",
+        "iconPath": "icons/secondhand.png",
+        "selectedIconPath": "icons/secondhand_selected.png"
+      },
+      {
+        "pagePath": "pages/crowdfunding/index/index",
+        "text": "慈善众筹",
+        "iconPath": "icons/crowdfunding.png",
+        "selectedIconPath": "icons/crowdfunding_selected.png"
+      },
+      {
+        "pagePath": "pages/more/index/index",
+        "text": "更多功能",
+        "iconPath": "icons/more.png",
+        "selectedIconPath": "icons/more_selected.png"
+      },
+      {
+        "pagePath": "pages/mine/index/index",
+        "text": "我的",
+        "iconPath": "icons/mine.png",
+        "selectedIconPath": "icons/mine_selected.png"
+      }
+    ]
+  },
+  "sitemapLocation": "sitemap.json",
+  "style": "v2"
+}

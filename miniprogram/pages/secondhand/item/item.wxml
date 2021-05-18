@@ -1,0 +1,36 @@
+<scroll-view style="height:calc(100vh - 80rpx)" scroll-y>
+  <swiper class="imagesSwiper" indicator-dots autoplay circular>
+    <swiper-item wx:for="{{data.image}}" wx:key="item" class="images">
+      <image class="image" src="{{item}}" id="{{index}}" mode="aspectFit" bindtap="preview"></image>
+    </swiper-item>
+  </swiper>
+  <view class="area">
+    <view class="title flex justify-between  align-end">
+      <view class="price">
+        <view class="sellPrice">{{data.sellPrice}}</view>
+        <view class="buyPrice">{{data.buyPrice}}</view>
+      </view>
+      <view class="sellDate" style="color:gray">{{data.sellDate}}</view>
+    </view>
+    <view class="itemName">{{data.itemName}}</view>
+  </view>
+  <view class="area">
+    <view class="degree">
+      <text style="font-weight:800;">新旧程度</text>
+      ：{{data.degree}}
+    </view>
+    <view class="buyDate">
+      <text style="font-weight:800;">购买日期</text>
+      ：{{data.buyDate}}
+    </view>
+  </view>
+  <view class="area description" style="min-height:calc(100vh - 1200rpx)">
+    <view>{{data.description}}</view>
+  </view>
+</scroll-view>
+<button wx:if="{{state==0}}" class="cu-btn bg-blue lg" bindtap="buyBtn"
+  style="width:750rpx;border-radius: 0;">确认购买</button>
+<button wx:if="{{state==1}}" class="cu-btn bg-orange lg" bindtap="cancelBtn"
+  style="width:750rpx;border-radius: 0;">取消购买</button>
+<button wx:if="{{state==2}}" class="cu-btn bg-orange lg" bindtap="deleteBtn"
+  style="width:750rpx;border-radius: 0;">删除物品</button>

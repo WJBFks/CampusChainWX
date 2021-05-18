@@ -1,0 +1,68 @@
+<form bindsubmit="submitForm">
+  <input type="text" name="image" value="{{imgList}}" maxlength="-1" hidden></input>
+  <view class="cu-form-group margin-top">
+    <view style="color:red;font-size:60rpx;margin-top:20rpx;margin-right:15rpx">*</view>
+    <view class="title" style="margin-right:60rpx">
+      相关图片<text style="font-size:24rpx;color:gray;margin-left:20rpx">建议使用16:9的宽型图片</text>
+    </view>
+    <view style="flex:1"></view>
+    <view id="cursor" style="color:{{cursor<=200?'black':'red'}}">
+      {{imgList.length}}/4
+    </view>
+  </view>
+  <view class="cu-form-group" style="border-top: 0;">
+    <view class="grid col-4 grid-square flex-sub">
+      <view class="bg-img" wx:for="{{imgList}}" wx:key="{{index}}" bindtap="ViewImage" data-url="{{imgList[index]}}">
+        <image src='{{imgList[index]}}' mode='aspectFill'></image>
+        <view class="cu-tag bg-red" catchtap="DelImg" data-index="{{index}}">
+          <text class="cuIcon-close"></text>
+        </view>
+      </view>
+      <view class="solids" bindtap="ChooseImage" wx:if="{{imgList.length<4}}">
+        <text class="cuIcon-cameraadd"></text>
+      </view>
+    </view>
+  </view>
+  <view class="cu-form-group" style="margin-top:20rpx">
+    <view style="color:red;font-size:60rpx;margin-top:20rpx;margin-right:15rpx">*</view>
+    <view class="title">众筹标题</view>
+    <input type="text" placeholder="请输入众筹标题" name="title"></input>
+  </view>
+  <view class="cu-form-group">
+    <view style="color:red;font-size:60rpx;margin-top:20rpx;margin-right:15rpx">*</view>
+    <view class="title">目标金额</view>
+    <input type="digit" placeholder="请设置众筹目标金额" name="target"></input>
+  </view>
+  <view class="cu-form-group">
+    <view style="color:red;font-size:60rpx;margin-top:20rpx;margin-right:15rpx">*</view>
+    <view class="title">截止日期</view>
+    <picker mode="date" value="{{date}}" start="{{day}}" end="2030-12-31" bindchange="DateChange" name="date">
+      <view class="picker" style="color:{{date?'black':'gray'}}">
+        {{date?date:'请选择众筹截止日期'}}
+      </view>
+    </picker>
+  </view>
+  <view class="cu-form-group">
+    <view style="color:red;font-size:60rpx;margin-top:20rpx;margin-right:15rpx">*</view>
+    <view class="title">实名申请</view>
+    <switch class=" blue sm RealNameApp" checked name="RealNameApp"></switch>
+  </view>
+  <view class="cu-form-group" id="detail">
+    <view>勾选实名申请后，您的实名信息将会展示给资助者</view>
+  </view>
+  <view bindtap="startInput">
+    <view class="cu-form-group margin-top">
+      <view style="color:red;font-size:60rpx;margin-top:20rpx;margin-right:15rpx">*</view>
+      <view class="title" style="margin-right:60rpx">申请原因</view>
+      <view style="flex:1"></view>
+      <view id="cursor" style="color:{{cursor<=500?'black':'red'}}">
+        {{cursor}}/500
+      </view>
+    </view>
+    <view class="cu-form-group" style="border-top: 0;">
+      <textarea id="desText" auto-height="true" maxlength="-1" disabled="{{modalName!=null}}" focus="{{onInputing}}"
+        bindinput="textareaAInput" placeholder="请输入申请详细原因" name="description"></textarea>
+    </view>
+  </view>
+  <button id="submit" form-type="submit" class="cu-btn bg-blue shadow lg">确认申请</button>
+</form>

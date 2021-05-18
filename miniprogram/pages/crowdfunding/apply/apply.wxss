@@ -1,0 +1,40 @@
+/* pages/secondhand/sell/sell.wxss */
+#submit {
+  position: fixed;
+  bottom: 0;
+  border-radius: 0;
+  width: 100%;
+  z-index: 1000;
+}
+
+#desText {
+  margin-top: 0;
+  font-size: 32rpx;
+  overflow: hidden;
+}
+
+#cursor {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  justify-content: center;
+  max-width: 200rpx;
+  margin-right: 0;
+  font-size: 28rpx;
+}
+
+.cu-form-group picker .picker {
+  text-align: left;
+}
+
+.RealNameApp {
+  flex: 1;
+  text-align: end;
+}
+
+#detail {
+  margin-top: -50rpx;
+  border-top: 0;
+  padding-left: 68rpx;
+  color: gray;
+}

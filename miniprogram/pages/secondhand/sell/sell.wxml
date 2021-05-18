@@ -1,0 +1,72 @@
+<form bindsubmit="submitForm">
+  <input type="text" name="image" value="{{imgList}}" maxlength="-1" hidden></input>
+  <view class="cu-form-group margin-top">
+    <view style="color:red;font-size:60rpx;margin-top:20rpx;margin-right:15rpx">*</view>
+    <view class="title" style="margin-right:60rpx">物品图片</view>
+    <view style="flex:1"></view>
+    <view id="cursor" style="color:{{cursor<=200?'black':'red'}}">
+      {{imgList.length}}/4
+    </view>
+  </view>
+  <view class="cu-form-group" style="border-top: 0;">
+    <view class="grid col-4 grid-square flex-sub">
+      <view class="bg-img" wx:for="{{imgList}}" wx:key="{{index}}" bindtap="ViewImage" data-url="{{imgList[index]}}">
+        <image src='{{imgList[index]}}' mode='aspectFill'></image>
+        <view class="cu-tag bg-red" catchtap="DelImg" data-index="{{index}}">
+          <text class="cuIcon-close"></text>
+        </view>
+      </view>
+      <view class="solids" bindtap="ChooseImage" wx:if="{{imgList.length<4}}">
+        <text class="cuIcon-cameraadd"></text>
+      </view>
+    </view>
+  </view>
+  <view class="cu-form-group" style="margin-top:20rpx">
+    <view style="color:red;font-size:60rpx;margin-top:20rpx;margin-right:15rpx">*</view>
+    <view class="title" style="margin-right:30rpx">物品名</view>
+    <input type="text" placeholder="请填写物品名称" name="itemName"></input>
+  </view>
+  <view class="cu-form-group">
+    <view style="color:red;font-size:60rpx;margin-top:20rpx;margin-right:15rpx">*</view>
+    <view class="title">出售价格</view>
+    <input type="digit" placeholder="请设置物品转手价格" name="sellPrice"></input>
+  </view>
+  <view class="cu-form-group">
+    <view style="color:red;font-size:60rpx;margin-top:20rpx;margin-right:15rpx">*</view>
+    <view class="title">购买价格</view>
+    <input type="digit" placeholder="请输入物品购买时的原价" name="buyPrice"></input>
+  </view>
+  <view class="cu-form-group">
+    <view style="color:red;font-size:60rpx;margin-top:20rpx;margin-right:15rpx">*</view>
+    <view class="title">新旧程度</view>
+    <picker bindchange="PickerChange" value="{{index}}" range="{{picker}}" name="degree">
+      <view class="picker" style="color:{{index?'black':'gray'}}">
+        {{index?picker[index]:'请选择新旧程度'}}
+      </view>
+    </picker>
+  </view>
+  <view class="cu-form-group">
+    <view style="color:red;font-size:60rpx;margin-top:20rpx;margin-right:15rpx">*</view>
+    <view class="title">购买日期</view>
+    <picker mode="date" value="{{date}}" start="2010-01-01" end="{{day}}" bindchange="DateChange" name="buyDate">
+      <view class="picker" style="color:{{date?'black':'gray'}}">
+        {{date?date:'请选择物品购买日期'}}
+      </view>
+    </picker>
+  </view>
+  <view bindtap="startInput">
+    <view class="cu-form-group margin-top">
+      <view style="color:red;font-size:60rpx;margin-top:20rpx;margin-right:15rpx">*</view>
+      <view class="title" style="margin-right:60rpx">物品描述</view>
+      <view style="flex:1"></view>
+      <view id="cursor" style="color:{{cursor<=500?'black':'red'}}">
+        {{cursor}}/500
+      </view>
+    </view>
+    <view class="cu-form-group" style="border-top: 0;">
+      <textarea id="desText" auto-height="true" maxlength="-1" disabled="{{modalName!=null}}" focus="{{onInputing}}"
+        bindinput="textareaAInput" placeholder="请输入物品描述" name="description"></textarea>
+    </view>
+  </view>
+  <button id="submit" form-type="submit" class="cu-btn bg-blue shadow lg">确认寄售</button>
+</form>

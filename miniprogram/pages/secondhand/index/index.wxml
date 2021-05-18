@@ -1,0 +1,67 @@
+<!-- 加载中 -->
+<view wx:if="{{loading==0}}" class="sss">
+  <view class="onloading">
+    <image class="loadImage loading lg"></image>
+    加载中...
+  </view>
+</view>
+<!-- 加载失败 -->
+<view wx:if="{{loading==-1}}" class="sss">
+  <view class="onloading">
+    <image class="loadImage loading lg"></image>
+    加载失败
+  </view>
+</view>
+<!-- 加载完成 -->
+<block wx:if="{{loading==1}}">
+  <!-- 左侧 -->
+  <view class="left">
+    <view wx:for="{{sells_left}}" id="{{item._id}}" wx:key="index" class="merchandises cu-card case"
+      bindtap="selectItem">
+      <view class="cu-item merchandisesMain">
+        <view class="image">
+          <image src="{{item.image[0]}}" mode="widthFix"></image>
+          <view wx:if="{{item.state==2}}" class="cu-tag bg-blue">我的</view>
+          <view wx:if="{{item.state==1}}" class="cu-tag bg-orange">已购</view>
+          <view class="cu-bar bg-shadeBottom">
+            <text class="text-cut">{{item.itemName}}</text>
+          </view>
+        </view>
+        <view class="cu-list price">
+          <text class="salePrice">{{item.sellPrice}}</text>
+          <text class="purPrice">{{item.buyPrice}}</text>
+        </view>
+        <view class="cu-list brief" style="margin-top:0">
+          <view class="text text-cut-3">{{item.description}}</view>
+          <view class="date">{{item.sellDate}}</view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <!-- 右侧 -->
+  <view class="right">
+    <view wx:for="{{sells_right}}" id="{{item._id}}" wx:key="index" class="merchandises cu-card case"
+      bindtap="selectItem">
+      <view class="cu-item merchandisesMain">
+        <view class="image">
+          <image src="{{item.image[0]}}" mode="widthFix"></image>
+          <view wx:if="{{item.state==2}}" class="cu-tag bg-blue">我的</view>
+          <view wx:if="{{item.state==1}}" class="cu-tag bg-orange">已购</view>
+          <view class="cu-bar bg-shadeBottom">
+            <text class="text-cut">{{item.itemName}}</text>
+          </view>
+        </view>
+        <view class="cu-list price">
+          <text class="salePrice">{{item.sellPrice}}</text>
+          <text class="purPrice">{{item.buyPrice}}</text>
+        </view>
+        <view class="cu-list brief" style="margin-top:0">
+          <view class="text text-cut-3">{{item.description}}</view>
+          <view class="date">{{item.sellDate}}</view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <!-- 寄售按钮 -->
+  <button class="cu-btn bg-blue" id="saleBtn" bindtap="sellBtn">寄售物品</button>
+</block>

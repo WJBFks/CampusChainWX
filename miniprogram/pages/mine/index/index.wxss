@@ -1,0 +1,46 @@
+/* 导航栏 */
+.ellipse {
+  width: 750rpx;
+  height: 500rpx;
+  margin-left: 0;
+  margin-top: -150rpx;
+  padding-top: 150rpx;
+  border-radius: 250% / 50%;
+}
+
+/* 信息 */
+.header .infor {
+  height: 128rpx;
+}
+
+.header .avatar {
+  margin-left: 30rpx;
+  width: 128rpx;
+  height: 128rpx;
+  border-radius: 100%;
+  border: 5rpx #66b5ff solid;
+  box-shadow: 0rpx 0rpx 10rpx #66b5ff;
+}
+
+.header .infor .name {
+  margin-top: -120rpx;
+  margin-left: 180rpx;
+  font-weight: 1000;
+  font-size: 38rpx;
+  color: white;
+  z-index: 999;
+}
+
+.header .infor .detail {
+  margin-top: 10rpx;
+  display: inline-block;
+  margin-left: 160rpx;
+  font-size: 24rpx;
+  z-index: 999;
+  padding: 8rpx 20rpx;
+  border-radius: 22rpx;
+  letter-spacing: 6rpx;
+  font-weight: 500;
+  color: #ebfffe;
+}
+

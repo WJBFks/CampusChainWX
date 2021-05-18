@@ -1,0 +1,62 @@
+<!-- 加载中 -->
+<view wx:if="{{loading==0}}" class="sss">
+  <view class="onloading">
+    <image class="loadImage loading lg"></image>
+    加载中...
+  </view>
+</view>
+<!-- 加载失败 -->
+<view wx:if="{{loading==-1}}" class="sss">
+  <view class="onloading">
+    <image class="loadImage loading lg"></image>
+    加载失败
+  </view>
+</view>
+<!-- 加载完成 -->
+<view wx:if="{{loading==1}}" style="margin-bottom: 74rpx;">
+  <view wx:for="{{applications}}" id="{{item._id}}" wx:key="index" class="cu-card case" bindtap="selectItem">
+    <view class="cu-item main">
+      <view class="image">
+        <image src="{{item.image[0]}}" mode="aspectFill"></image>
+        <view class="cu-bar bg-shadeBottom">
+          <text class="text-cut">{{item.title}}</text>
+        </view>
+      </view>
+      <view class="cu-list flex justify-between padding-xs">
+        <text class="target">{{item.target}}</text>
+        <text class="now">{{item.now}}</text>
+      </view>
+      <view wx:if="{{item.RealNameApp}}" class="cu-list flex justify-between padding-xs"
+        style="height:120rpx;margin-top:0">
+        <view>
+          <view class="avatar cu-avatar round lg" style="background-image:url({{item.applicant.userInfo.avatarUrl}});">
+          </view>
+          <view class="name">{{item.applicant.moreInfo.realName}}</view>
+          <view class="school">{{item.applicant.moreInfo.school}}</view>
+        </view>
+        <view style="justify-items: center;">
+          <view class="label cu-btn bg-blue shadow">
+            实名
+          </view>
+        </view>
+      </view>
+      <view wx:if="{{!item.RealNameApp}}" class="cu-list padding-xs" style="height:120rpx">
+        <view>
+          <view class="avatar cu-avatar round lg" style="background-image:url({{item.applicant.userInfo.avatarUrl}});">
+          </view>
+          <view class="name">{{item.applicant.userInfo.nickName}}</view>
+          <view class="school">非实名</view>
+        </view>
+      </view>
+      <view class="cu-list padding-xs" style="margin-top:0">
+        <view class="text text-cut-3">{{item.description}}</view>
+      </view>
+      <view class="cu-list flex justify-between padding-xs" style="margin-top:0">
+        <view class="date">截止日期：{{item.date}}</view>
+        <view class="date">申请日期：{{item.applyDate}}</view>
+      </view>
+    </view>
+  </view>
+  <!-- 申请按钮 -->
+  <button class="cu-btn bg-blue" id="Btn" bindtap="Btn">发起众筹</button>
+</view>

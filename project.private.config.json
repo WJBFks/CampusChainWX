@@ -1,0 +1,78 @@
+{
+  "setting": {},
+  "condition": {
+    "plugin": {
+      "list": []
+    },
+    "game": {
+      "list": []
+    },
+    "gamePlugin": {
+      "list": []
+    },
+    "miniprogram": {
+      "list": [
+        {
+          "id": -1,
+          "name": "db guide",
+          "pathName": "pages/databaseGuide/databaseGuide",
+          "query": ""
+        },
+        {
+          "name": "pages/mine/index/index",
+          "pathName": "pages/mine/index/index",
+          "query": "id=on8O65OUTCWDHyuvmpI7TBaUtIXw",
+          "scene": null
+        },
+        {
+          "name": "pages/secondhand/index/index",
+          "pathName": "pages/secondhand/index/index",
+          "query": "id=on8O65OUTCWDHyuvmpI7TBaUtIXw",
+          "scene": null
+        },
+        {
+          "name": "pages/secondhand/sell/sell",
+          "pathName": "pages/secondhand/sell/sell",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/secondhand/index/index",
+          "pathName": "pages/secondhand/index/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/secondhand/item/item",
+          "pathName": "pages/secondhand/item/item",
+          "query": "id=17453ede609b79f2093007fb0b6c8c9e",
+          "scene": null
+        },
+        {
+          "name": "pages/crowdfunding/index/index",
+          "pathName": "pages/crowdfunding/index/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/crowdfunding/apply/apply",
+          "pathName": "pages/crowdfunding/apply/apply",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/crowdfunding/index/index",
+          "pathName": "pages/crowdfunding/index/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/crowdfunding/item/item",
+          "pathName": "pages/crowdfunding/item/item",
+          "query": "id=cbddf0af609f6815089ad6626e46300f",
+          "scene": null
+        }
+      ]
+    }
+  }
+}

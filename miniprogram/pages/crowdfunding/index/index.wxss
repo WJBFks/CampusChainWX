@@ -1,0 +1,92 @@
+.onloading {
+  font-size: 64rpx;
+  margin-left: 250rpx;
+  margin-top: 200rpx;
+}
+
+.onloading .loadImage {
+  display: inline;
+}
+
+.onloading .loadImage::after {
+  margin-top: 13rpx;
+  margin-right: 12rpx;
+  width: 64rpx;
+  height: 64rpx;
+  line-height: 64rpx;
+  font-size: 64rpx;
+}
+
+#Btn {
+  width: 750rpx;
+  border-radius: 0;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+}
+
+image {
+  width: 730rpx;
+  height: 410.625rpx;
+
+}
+
+.cu-card>.cu-item {
+  margin: 10rpx;
+}
+
+.main {
+  box-shadow: 5rpx 5rpx 5rpx #ccc;
+}
+
+.bg-shadeBottom {
+  min-height: 60rpx;
+  background-image: linear-gradient(rgba(50, 50, 50, 0.01), rgba(50, 50, 50, 1));
+  font-size: 32rpx;
+  font-weight: 500;
+}
+
+.target {
+  color: #c90000;
+  font-size: 48rpx;
+  text-shadow: 2rpx 2rpx 2rpx #5e0000;
+  height: 60rpx;
+}
+
+.target::before {
+  content: "目标：￥";
+  font-size: 28rpx;
+}
+
+.now {
+  font-size: 48rpx;
+  color: gray;
+}
+
+.now::before {
+  content: "当前：￥";
+  font-size: 28rpx;
+}
+
+.avatar {
+  box-shadow: #aaa 0rpx 0rpx 10rpx;
+}
+
+.name {
+  margin-left: 120rpx;
+  margin-top: -95rpx;
+  font-size: 36rpx;
+}
+
+.school {
+  margin-left: 120rpx;
+  margin-top: 10rpx;
+  font-size: 28rpx;
+}
+
+.label {
+  border-radius: 20rpx;
+  width: 120rpx;
+  height: 60rpx;
+  margin-top: 20rpx;
+}
