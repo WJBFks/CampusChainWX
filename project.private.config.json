@@ -71,6 +71,42 @@
           "pathName": "pages/crowdfunding/item/item",
           "query": "id=cbddf0af609f6815089ad6626e46300f",
           "scene": null
+        },
+        {
+          "name": "收集表",
+          "pathName": "pages/gathering/item/item",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "填表",
+          "pathName": "pages/gathering/fill/fill",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "发起收集表",
+          "pathName": "pages/gathering/initiate/initiate",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "身份管理",
+          "pathName": "pages/identity/index/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "身份组管理",
+          "pathName": "pages/identity/group/group",
+          "query": "authority=100",
+          "scene": null
+        },
+        {
+          "name": "我的身份",
+          "pathName": "pages/identity/index/index",
+          "query": "tab=1",
+          "scene": null
         }
       ]
     }

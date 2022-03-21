@@ -1,4 +1,16 @@
 import components from './helpers/components'
+const cloud = wx.cloud
+wx.cloud.init()
+const db = wx.cloud.database();
+var user;
+var userGetTimeStamp = null;
+var userUpdateTimeStamp = null;
+
+// const id = 'on8O65OUTCWDHyuvmpI7TBaUtIXw'
+// const lunchTo = '/pages/gathering/fill/fill?id=gat-1646706645256'
+// const lunchTo = '/pages/gathering/initiate/initiate'
+// const lunchTo = "/pages/gathering/initiate/initiate"
+const lunchTo = "/pages/mine/index/index"
 
 App({
   components,
@@ -10,83 +22,240 @@ App({
     menuHeight: 0, // 胶囊高度（自定义内容可与胶囊高度保证一致）
     navDis: 0,
     navTop: 0,
-    openid: ""
+    openid: "",
+    loadDone: false,
   },
 
   onLaunch: function () {
-    var that = this;
+    this.calcNav()
+    wx.cloud.callFunction({
+        name: 'login',
+      })
+      .then(res => {
+        this.globalData.openid = res.result.openid;
+        return this.User().get()
+      })
+      .then(res => {}, err => {})
+      .then(res => {
+        this.globalData.loadDone = true;
+        wx.reLaunch({
+          url: lunchTo
+        })
+      })
+  },
+
+  calcNav() {
     // 获取导航栏信息
     // 获取系统信息
     const systemInfo = wx.getSystemInfoSync();
     // 胶囊按钮位置信息
     const menuButtonInfo = wx.getMenuButtonBoundingClientRect();
     //
-    that.globalData.navTop = systemInfo.statusBarHeight;
+    this.globalData.navTop = systemInfo.statusBarHeight;
     // 导航栏间距 = （胶囊距上距离-状态栏高度）
-    that.globalData.navDis = (menuButtonInfo.top - systemInfo.statusBarHeight);
+    this.globalData.navDis = (menuButtonInfo.top - systemInfo.statusBarHeight);
     // 导航栏高度 = 导航栏间距 * 2 + 胶囊高度 + 状态栏高度
-    that.globalData.navBarHeight = that.globalData.navDis * 2 + menuButtonInfo.height + systemInfo.statusBarHeight;
-    that.globalData.menuRight = systemInfo.screenWidth - menuButtonInfo.right;
-    that.globalData.menuBotton = menuButtonInfo.top - systemInfo.statusBarHeight;
-    that.globalData.menuHeight = menuButtonInfo.height;
-    // 云函数初始化
-    if (!wx.cloud) {
-      console.error('请使用 2.2.3 或以上的基础库以使用云能力')
-    } else {
-      wx.cloud.init({
-        // env 参数说明：
-        //   env 参数决定接下来小程序发起的云开发调用（wx.cloud.xxx）会默认请求到哪个云环境的资源
-        //   此处请填入环境 ID, 环境 ID 可打开云控制台查看
-        //   如不填则使用默认环境（第一个创建的环境）
-        // env: 'my-env-id',
-        traceUser: true,
-      })
-    }
+    this.globalData.navBarHeight = this.globalData.navDis * 2 + menuButtonInfo.height + systemInfo.statusBarHeight;
+    this.globalData.menuRight = systemInfo.screenWidth - menuButtonInfo.right;
+    this.globalData.menuBotton = menuButtonInfo.top - systemInfo.statusBarHeight;
+    this.globalData.menuHeight = menuButtonInfo.height;
+  },
 
-    let openID;
-    wx.getStorage({
-        key: 'openID',
-      })
-      .then(res => {
-        console.log("openID读取缓存成功");
-        openID = res.data;
-      }, err => {
-        console.log("openID读取缓存失败");
+  getIdentity(a) {
+    if (a == 100) {
+      return '最高管理员'
+    } else if (a >= 80) {
+      return '高级管理员' + (a == 80 ? '' : a - 80)
+    } else if (a >= 60) {
+      return '大学负责人' + (a == 60 ? '' : a - 60)
+    } else if (a >= 40) {
+      return '学院负责人' + (a == 40 ? '' : a - 40)
+    } else if (a >= 30) {
+      return '年级负责人' + (a == 30 ? '' : a - 30)
+    } else if (a >= 20) {
+      return '专业负责人' + (a == 20 ? '' : a - 20)
+    } else if (a >= 10) {
+      return '班级负责人' + (a == 10 ? '' : a - 10)
+    } else {
+      return '学生' + (a == 0 ? '' : a)
+    }
+  },
+
+  getTimeStamp(ts) {
+    let date;
+    if (ts) {
+      date = new Date(ts)
+    } else {
+      date = new Date()
+    }
+    let timestamp = date.getTime()
+    return {
+      timestamp,
+      date() {
+        var Y = date.getFullYear();
+        var M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1);
+        var D = date.getDate() < 10 ? '0' + date.getDate() : date.getDate();
+        return Y + '-' + M + '-' + D
+      },
+      time(ss) {
+        var h = date.getHours() < 10 ? '0' + date.getHours() : date.getHours();
+        var m = date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes();
+        var s = date.getSeconds() < 10 ? '0' + date.getSeconds() : date.getSeconds();
+        if(ss){
+          return h + ':' + m + ':' + s
+        }else{
+          return h + ':' + m
+        }
+      },
+      full() {
+        return this.date() + ' ' + this.time();
+      }
+    }
+  },
+
+  User(id) {
+    var that = this;
+    return {
+      get(openid) {
+        if (openid == null) {
+          openid = id
+        }
         return new Promise((resolve, reject) => {
-          wx.cloud.callFunction({
-              name: 'login',
+          if (openid == null && userGetTimeStamp != null && (
+              userUpdateTimeStamp == null ||
+              userGetTimeStamp > userUpdateTimeStamp)) {
+            userGetTimeStamp = that.getTimeStamp();
+            resolve(user);
+          } else {
+            cloud.callFunction({
+              name: 'userDB',
+              data: {
+                operate: 'get',
+                openid
+              }
+            }).then(res => {
+              if (openid == null) {
+                user = res.result
+                userGetTimeStamp = that.getTimeStamp();
+              }
+              resolve(res.result)
+            }).catch(err => {
+              reject(err)
             })
-            .then(res => {
-              console.log("通过云函数获取openID成功");
-              openID = res.result.openid;
-              wx.setStorage({
-                  key: 'openID',
-                  data: openID,
-                })
-                .then(res => {
-                  console.log("openID缓存成功")
-                  resolve("openID缓存成功")
-                })
-                .catch(err => {
-                  console.log("openID缓存失败");
-                  reject("openID缓存失败")
-                })
-            }, err => {
-              console.log("通过云函数获取openID失败");
-              reject("通过云函数获取openID失败")
-            })
+          }
         })
-      })
-      .then(res => {
-        that.globalData.openid = openID;
-        console.log('openID获取完成');
-      }, err => {
-        console.log('openID获取失败');
-        console.log(err);
-      })
-      .catch(err => {
-        console.log('openID获取失败');
-        console.log(err);
-      })
+      },
+      addup({
+        openid,
+        userinfo,
+        identity,
+      }) {
+        if (openid == null) {
+          openid = id
+        }
+        return new Promise((resolve, reject) => {
+          cloud.callFunction({
+            name: 'userDB',
+            data: {
+              operate: 'add/update',
+              openid,
+              userinfo,
+              identity,
+            }
+          }).then(res => {
+            if (openid == null) {
+              userUpdateTimeStamp = that.getTimeStamp();
+            }
+            resolve({
+              meg: '添加/更新成功',
+              res
+            })
+          }).catch(err => {
+            reject({
+              meg: '添加/更新失败',
+              err
+            })
+          })
+        })
+      },
+      gets() {
+        return {
+          identity() {
+            return new Promise((resolve, reject) => {
+              cloud.callFunction({
+                name: 'userDB',
+                data: {
+                  operate: 'gets-check_index',
+                }
+              }).then(res => {
+                resolve(res)
+              }).catch(err => {
+                reject(err)
+              })
+            })
+          }
+        }
+      },
+      getField() {
+        return {
+          name() {
+            return new Promise((resolve, reject) => {
+              cloud.callFunction({
+                name: 'userDB',
+                data: {
+                  operate: 'get-name',
+                }
+              }).then(res => {
+                resolve(res.result.data)
+              }).catch(err => {
+                reject(err)
+              })
+            })
+          },
+        }
+      }
+    }
+  },
+
+  stringify(obj) {
+    if (obj == null || obj == undefined) {
+      return
+    }
+    let s = {}
+    for (let [key, value] of Object.entries(obj)) {
+      if (value.constructor == Number || value.constructor == Boolean || value.constructor == String) {
+        s[key] = value
+      } else {
+        s[key] = JSON.stringify(value)
+      }
+    }
+    console.log(s);
+    return s
+  },
+
+  Request(api) {
+    let that = this
+    return {
+      POST(data) {
+        return new Promise((resolve, reject) => {
+          wx.request({
+            // url: `http://60.205.176.207:9000` + api,
+            url: `https://gzx.asia:9000` + api,
+            header: {
+              'content-type': 'application/x-www-form-urlencoded',
+            },
+            method: 'POST',
+            data: that.stringify(data),
+            timeout: 100000,
+            success: (res) => {
+              resolve(res)
+            },
+            fail: (err) => {
+              reject(err)
+            },
+          })
+        })
+      }
+    }
   }
 })

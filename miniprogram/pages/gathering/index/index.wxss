@@ -1,0 +1,9 @@
+/* pages/gathering/index/index.wxss */
+.cu-avatar {
+  box-shadow: 0rpx 0rpx 10rpx #ccc;
+}
+
+#initiate{
+  border-radius: 0;
+  width: 750rpx;
+}

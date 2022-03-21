@@ -1,0 +1,16 @@
+<view class="ellipse bg-blue">
+  <view class=" header" style="padding-top:{{navBarHeight}}px">
+    <view class="infor">
+      <image class="avatar" src="/icons/logo.png" mode="aspectFill"></image>
+      <view class="name">链上校园</view>
+      <view class="detail">基于区块链的智慧校园平台</view>
+    </view>
+  </view>
+</view>
+<view class="sss">
+  <view class="onloading">
+    <image class="loadImage loading lg"></image>
+    <view>加载中...</view> 
+  </view>
+  <view class="timeout">{{timeout}}</view> 
+</view>

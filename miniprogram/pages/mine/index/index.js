@@ -1,6 +1,8 @@
 // pages/mine/index/index.js
 const app = getApp()
 const db = wx.cloud.database();
+const cloud = wx.cloud
+wx.cloud.init()
 
 Page({
 
@@ -15,9 +17,10 @@ Page({
     navDis: app.globalData.navDis,
     navTop: app.globalData.navTop,
 
-    openID: "",
+    str: null,
+    loginStatus: 'loading',
     user: {
-      userInfo: {
+      userinfo: {
         avatarUrl: "/images/test.png",
         nickName: "未登录用户"
       }
@@ -27,68 +30,87 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
+  test() {
+    app.Request('/test').POST({
+      test: {
+        name: '123',
+        str: 'hello wolrd'
+      },
+    }).then(res => {
+      this.setData({
+        str: res.data.str
+      })
+      console.log(res);
+    }).catch(err => {
+      console.log(err);
+    })
+  },
+
   onLoad: function (options) {
-    if (options.id) {
-      var openID = options.id;
-      db.collection('users').doc(openID).get()
+    // this.test()
+    // cloud.callFunction({
+    //   name: 'request',
+    //   data: {
+    //     url: 'http://60.205.176.207:9000'
+    //   }
+    // }).then(res => {
+    //   console.log(res);
+    // }, err => {
+    //   console.log(err);
+    // })
+
+
+    this.setData({
+      loginStatus: 'register'
+    })
+    app.User().get().then(res => {
+      return this.login()
+    }, err => {
+      console.log('未注册用户');
+    })
+  },
+
+  login() {
+    return new Promise((resolve, reject) => {
+      app.User().get()
         .then(res => {
           this.setData({
-            openID: openID,
-            user: res.data
+            user: res,
+            loginStatus: 'login'
           })
+          resolve('登录成功')
         })
         .catch(err => {
-          console.log(err);
+          this.setData({
+            loginStatus: 'register'
+          })
+          reject(err)
         })
-    }
+    })
   },
 
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
+  getUserProfile(e) {
+    var that = this;
+    wx.getUserProfile({
+        desc: '用于登录', // 声明获取用户个人信息后的用途，后续会展示在弹窗中，请谨慎填写
+      })
+      .then(res => {
+        return app.User().addup({
+          userinfo: res.userInfo
+        })
+      })
+      .then(res => {
+        console.log(res);
+        that.login()
+      })
+      .catch(err => {
+        console.log(err);
+      })
   },
 
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
+  toIdentity() {
+    wx.reLaunch({
+      url: "/pages/identity/index/index?tab=1"
+    })
   }
 })

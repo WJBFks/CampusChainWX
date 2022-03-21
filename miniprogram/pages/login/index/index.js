@@ -144,30 +144,7 @@ Page({
         msg: '提交成功',
       })
       params.school = schools[params.school];
-      db.collection('users').add({
-          data: {
-            _id: openID,
-            userInfo: userInfo,
-            moreInfo: params
-          }
-        })
-        .then(res => {}, err => {
-          if (err.errCode) {
-            return db.collection('users').doc(openID).update({
-              data: {
-                userInfo: userInfo,
-                moreInfo: params
-              }
-            })
-          } else {
-            throw "数据库数据添加错误"
-          }
-        })
-        .then(res => {
-          return wx.reLaunch({
-            url: '/pages/mine/index/index?id=' + openID
-          })
-        })
+      
     }
   },
 

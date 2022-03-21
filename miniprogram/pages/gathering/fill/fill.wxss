@@ -1,0 +1,28 @@
+/* pages/gathering/fill/fill.wxss */
+.required::after {
+  content: '*';
+  color: red;
+  font-weight: bold;
+}
+
+.head {
+  margin-top: 20rpx;
+  height: 72rpx;
+  line-height: 72rpx;
+  display: flex;
+  font-size: 36rpx;
+  font-weight: 600;
+}
+
+.input.content {
+  height: 64rpx;
+  line-height: 64rpx;
+  margin-bottom: 10rpx;
+}
+
+
+.input.content input {
+  height: 64rpx;
+  line-height: 64rpx;
+  font-size: 30rpx;
+}

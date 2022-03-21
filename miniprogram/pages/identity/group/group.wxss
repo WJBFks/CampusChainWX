@@ -1,0 +1,58 @@
+/* pages/identity/group/group.wxss */
+#btn{
+  display: block;
+  width: 48rpx;
+  height: 48rpx;
+  padding: 0;
+  border-radius: 50%;
+  font-size: 34rpx;
+  font-weight: 400;
+}
+
+#btn.U{
+  border: #f37b1d 1rpx solid;
+}
+
+#btn.S{
+  border: #8dc63f 1rpx solid;
+  margin-left: 48rpx;
+}
+
+#btn.G{
+  border: #e03997 1rpx solid;
+  margin-left: 96rpx;
+}
+
+#btn.M{
+  border: #fbbd08 1rpx solid;
+  margin-left: 144rpx;
+}
+
+#btn.C{
+  border: #0081ff 1rpx solid;
+  margin-left: 192rpx;
+}
+
+.input-item{
+  display: flex;
+  margin-top: 16rpx;
+}
+
+.input-item input{
+  margin: 2rpx;
+  height: 46rpx;
+  font-size: 32rpx;
+  flex: 1;
+  margin-left: 16rpx;
+  padding: 0;
+}
+
+.pc{
+  color:#ccc;
+}
+
+#btn2,#btn3{
+  margin:0;
+  width: 50%;
+  border-radius: 0;
+}

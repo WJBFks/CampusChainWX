@@ -1,0 +1,54 @@
+<view wx:if="{{status==0}}" class="load-tip">
+  加载中......
+</view>
+<view wx:elif="{{status==1}}" class="load-tip">
+  加载失败
+</view>
+<view wx:elif="{{status>=2}}" class="cu-card case no-card">
+  <view class="cu-item shadow">
+    <view class="cu-list menu-avatar">
+      <view class="cu-item">
+        <image src="{{creator.userinfo.avatarUrl}}" class="cu-avatar round lg"></image>
+        <view class="content flex-sub">
+          <view class="text-grey" style="font-weight: 600;">{{gathering.name}}</view>
+          <view class="text-gray text-sm flex justify-between">
+            {{creator.userinfo.nickName}}
+            <view class="text-gray text-sm">
+              {{gathering.time_from}} to {{gathering.time_to}}
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="content padding-sm text-grey">
+      {{gathering.description}}
+    </view>
+    <view class="padding flex flex-direction">
+      <button class="cu-btn bg-blue" style="width: 100%;" bindtap="toFill" data-id="{{gathering.gat_id}}">填报</button>
+    </view>
+  </view>
+</view>
+<view wx:if="{{status==2}}" class="load-tip">
+  详情加载中......
+</view>
+<view wx:if="{{status==3}}" class="load-tip">
+  详情加载失败
+</view>
+<view wx:elif="{{status==5}}" class="cu-card article">
+  <view class="cu-item shadow" wx:for="{{len}}" wx:for-index='i' wx:key="{{i}}">
+    <view class="title flex">
+      <image src="{{userInfo[i].avatarUrl}}" class="cu-avatar round" style="height: 64rpx;width: 64rpx;margin-top: 20rpx;margin-right: 20rpx;"></image>
+      <view class="text-cut" style="font-weight: 500;color: gray;">{{userInfo[i].nickName}}</view>
+      <view class="flex-sub" style="font-weight: 500;color: gray;text-align: right;">{{detail.lines[i].time}}</view>
+    </view>
+    <view class="content" style="display: block;">
+      <view wx:for="{{detail.head.length}}" wx:for-index='j' wx:key="{{j}}" class="cell">
+        <!-- <view class="head text-cut" style="width:100rpx;text-align: right;">{{detail.head[j]}}：</view> -->
+        <view class="head text-cut" style="width: 150rpx;text-align: center;font-weight: 600;">{{detail.head[j]}} </view>
+        <view class="item" style="width: 480rpx;">
+          <view>：{{detail.lines[i].cells[j].content}}</view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,69 @@
+<scroll-view scroll-y style="height: calc(100vh - 64rpx);background-color: white;">
+  <form action="" class="margin margin-left" style="display: block;">
+    <!-- 大学 -->
+    <view wx:for="{{groups.length+1}}" wx:for-index="u" wx:key="u">
+      <view class="input-item">
+        <button id="btn" class="U bg-orange light text-orange">U</button>
+        <input wx:if="{{u<groups.length}}" type="text" value="{{groups[u].university}}" class="U" bindchange="inputChange" id="{{u}}" />
+        <input wx:else type="text" placeholder="添加大学" placeholder-class="pc" bindchange="inputChange" id="{{u}}" />
+      </view>
+      <!-- 学院 -->
+      <view wx:for="{{groups[u].schools.length+1}}" wx:for-index="s" wx:key="s">
+        <view class="input-item">
+          <button id="btn" class="S bg-olive light text-olive">S</button>
+          <input wx:if="{{s<groups[u].schools.length}}" type="text" value="{{groups[u].schools[s].school}}" class="S" bindchange="inputChange" id="{{u+'-'+s}}" />
+          <input wx:else type="text" placeholder="添加学院" placeholder-class="pc" bindchange="inputChange" id="{{u+'-'+s}}" />
+        </view>
+        <!-- 年级 -->
+        <view wx:for="{{groups[u].schools[s].grades.length+1}}" wx:for-index="g" wx:key="g">
+          <view class="input-item">
+            <button id="btn" class="G bg-pink light text-pink">G</button>
+            <input wx:if="{{g<groups[u].schools[s].grades.length}}" type="text" value="{{groups[u].schools[s].grades[g].grade}}" class="G" bindchange="inputChange" id="{{u+'-'+s+'-'+g}}" />
+            <input wx:else type="text" placeholder="添加年级" placeholder-class="pc" bindchange="inputChange" id="{{u+'-'+s+'-'+g}}" />
+          </view>
+          <!-- 专业 -->
+          <view wx:for="{{groups[u].schools[s].grades[g].majors.length+1}}" wx:for-index="m" wx:key="m">
+            <view class="input-item">
+              <button id="btn" class="M bg-yellow light text-yellow">M</button>
+              <input wx:if="{{m<groups[u].schools[s].grades[g].majors.length}}" type="text" value="{{groups[u].schools[s].grades[g].majors[m].major}}" bindchange="inputChange" id="{{u+'-'+s+'-'+g+'-'+m}}" />
+              <input wx:else type="text" placeholder="添加专业" placeholder-class="pc" bindchange="inputChange" id="{{u+'-'+s+'-'+g+'-'+m}}" />
+            </view>
+            <!-- 班级 -->
+            <view wx:for="{{groups[u].schools[s].grades[g].majors[m].classes.length+1}}" wx:for-index="c" wx:key="c">
+              <view class="input-item">
+                <button id="btn" class="C bg-blue light text-blue">C</button>
+                <input wx:if="{{c<groups[u].schools[s].grades[g].majors[m].classes.length}}" type="text" value="{{groups[u].schools[s].grades[g].majors[m].classes[c]}}" bindchange="inputChange" id="{{u+'-'+s+'-'+g+'-'+m+'-'+c}}" />
+                <input wx:else type="text" placeholder="添加班级" placeholder-class="pc" bindchange="inputChange" id="{{u+'-'+s+'-'+g+'-'+m+'-'+c}}" />
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </form>
+</scroll-view>
+<view class="flex">
+  <button id="btn2" class="cu-btn bg-white shadow" bindtap="reGetGroups">恢复</button>
+  <button id="btn3" class="cu-btn bg-blue shadow" bindtap="saveGroups">保存</button>
+</view>
+<!-- 删除提示框 -->
+<view class="cu-modal {{deleteModal!=''?'show':''}}">
+  <view class="cu-dialog">
+    <view class="cu-bar bg-white justify-end">
+      <view class="content">删除节点</view>
+      <view class="action" bindtap="hidedeleteModal">
+        <text class="cuIcon-close text-red"></text>
+      </view>
+    </view>
+    <view class="padding-xl">
+      <view>您即将删除的节点的子节点不为空</view>
+      <view>您仍确定要删除吗</view>
+    </view>
+    <view class="cu-bar bg-white justify-end">
+      <view class="action">
+        <button class="cu-btn line-blue text-blue" style="margin: 0 10%;" bindtap="hidedeleteModal">取消</button>
+        <button class="cu-btn bg-blue margin-left" bindtap="deleteModalConfirm">确定删除</button>
+      </view>
+    </view>
+  </view>
+</view>

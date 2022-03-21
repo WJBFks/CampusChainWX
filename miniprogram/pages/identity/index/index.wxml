@@ -1,0 +1,104 @@
+<scroll-view scroll-x class="bg-white nav">
+  <view class="flex text-center">
+    <view class="cu-item flex-sub {{index==TabCur?'text-blue cur':''}}" wx:for="{{tabs}}" wx:key bindtap="tabSelect" data-id="{{index}}" wx:key="index">
+      {{item}}
+    </view>
+  </view>
+</scroll-view>
+<swiper bindchange="swiperChange" snap-to-edge current="{{TabCur}}" style="height: calc(100vh - 90rpx);" class="bg-white">
+  <swiper-item>
+    <button class="bg-blue margin-top shadow-warp padding-xl" style="width: 700rpx;" wx:for="{{btns}}" wx:key="index" id="{{item}}" bindtap="BTNs">{{item}}</button>
+  </swiper-item>
+  <swiper-item>
+    <form action="" style="height: calc(100vh - 90rpx);">
+      <scroll-view id='scroll' scroll-y style="height: calc(100vh - 90rpx);">
+        <view class="cu-form-group">
+          <view class="title">状态</view>
+          <input value="{{status}}" style="text-align: right;color: red;" disabled></input>
+        </view>
+        <view class="cu-form-group">
+          <view class="title require">大学</view>
+          <picker bindchange="uPickerChange" value="{{uIndex}}" range="{{uPicker}}">
+            <view class="picker">
+              {{uPicker[uIndex]}}
+            </view>
+          </picker>
+        </view>
+        <view class="cu-form-group">
+          <view class="title require">学院</view>
+          <picker bindchange="sPickerChange" value="{{sIndex}}" range="{{sPicker}}">
+            <view class="picker">
+              {{sPicker[sIndex]}}
+            </view>
+          </picker>
+        </view>
+        <view class="cu-form-group">
+          <view class="title require">年级</view>
+          <picker bindchange="gPickerChange" value="{{gIndex}}" range="{{gPicker}}">
+            <view class="picker">
+              {{gPicker[gIndex]}}
+            </view>
+          </picker>
+        </view>
+        <view class="cu-form-group">
+          <view class="title require">专业</view>
+          <picker bindchange="mPickerChange" value="{{mIndex}}" range="{{mPicker}}">
+            <view class="picker">
+              {{mPicker[mIndex]}}
+            </view>
+          </picker>
+        </view>
+        <view class="cu-form-group">
+          <view class="title require">班级</view>
+          <picker bindchange="cPickerChange" value="{{cIndex}}" range="{{cPicker}}">
+            <view class="picker">
+              {{cPicker[cIndex]}}
+            </view>
+          </picker>
+        </view>
+        <view class="cu-form-group">
+          <view class="title require">姓名</view>
+          <input value="{{name}}" style="text-align: right;" placeholder="请输入姓名" id='name' bindchange="inputChange"></input>
+        </view>
+        <view class="cu-form-group">
+          <view class="title require">学号</view>
+          <input value="{{number}}" style="text-align: right;" placeholder="请输入学号" id='number' bindchange="inputChange"></input>
+        </view>
+        <view class="cu-form-group">
+          <view class="title require">手机</view>
+          <input value="{{phone}}" style="text-align: right;" placeholder="请输入手机" id='phone' bindchange="inputChange"></input>
+        </view>
+        <view class="cu-form-group">
+          <view class="title require">性别</view>
+          <view>
+            <radio-group bindchange="genderChange">
+              <label for="male" class="padding-right-sm">男</label>
+              <radio class="blue radio" id='male' value="male" checked="{{gender=='male'}}"/>
+              <label class="margin-left-xl padding-right-sm" for="female" checked="{{gender=='female'}}">女</label>
+              <radio class="pink radio" id='female' value="female" />
+            </radio-group>
+          </view>
+        </view>
+        <view class="cu-form-group">
+          <view class="title">邮箱</view>
+          <input value="{{email}}" style="text-align: right;" placeholder="请输入邮箱" id='email' bindchange="inputChange"></input>
+        </view>
+        <view class="cu-form-group">
+          <view class="title">QQ</view>
+          <input value="{{qq}}" style="text-align: right;" placeholder="请输入QQ" id='qq' bindchange="inputChange"></input>
+        </view>
+        <view class="cu-form-group">
+          <view class="title">权限</view>
+          <input value="{{authority}}" style="text-align: right;color: gray;" disabled></input>
+        </view>
+        <view class="cu-form-group">
+          <view class="title">身份</view>
+          <input value="{{identity}}" style="text-align: right;color: gray;" disabled></input>
+        </view>
+        <view class="cu-form-group">
+          <button class="cu-btn bg-blue" style="width: 100%;" bindtap="saveIdentiy">保存</button>
+        </view>
+      </scroll-view>
+    </form>
+  </swiper-item>
+</swiper>

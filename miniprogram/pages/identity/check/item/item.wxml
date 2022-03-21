@@ -1,0 +1,72 @@
+<form action="">
+  <view class="cu-form-group cu-list menu-avatar cu-item" style="height: 136rpx;">
+    <image src="{{user.userinfo.avatarUrl}}" class="cu-avatar round lg"></image>
+    <view class="text-black text-lg justify-between" style="font-weight: 600;">
+      {{user.userinfo.nickName}}
+    </view>
+  </view>
+  <view class="cu-form-group">
+    <view class="title">状态</view>
+    <input value="{{user.identity.status}}" style="text-align: right;color: red;" disabled></input>
+  </view>
+  <view class="cu-form-group" wx:if="{{user.identity.university}}">
+    <view class="title require">大学</view>
+    <input value="{{user.identity.university}}" style="text-align: right;" disabled></input>
+  </view>
+  <view class="cu-form-group" wx:if="{{user.identity.school}}">
+    <view class="title require">学院</view>
+    <input value="{{user.identity.school}}" style="text-align: right;" disabled></input>
+  </view>
+  <view class="cu-form-group" wx:if="{{user.identity.grade}}">
+    <view class="title require">年级</view>
+    <input value="{{user.identity.grade}}" style="text-align: right;" disabled></input>
+  </view>
+  <view class="cu-form-group" wx:if="{{user.identity.major}}">
+    <view class="title require">专业</view>
+    <input value="{{user.identity.major}}" style="text-align: right;" disabled></input>
+  </view>
+  <view class="cu-form-group" wx:if="{{user.identity.class}}">
+    <view class="title require">班级</view>
+    <input value="{{user.identity.class}}" style="text-align: right;" disabled></input>
+  </view>
+  <view class="cu-form-group" wx:if="{{user.identity.name}}">
+    <view class="title require">姓名</view>
+    <input value="{{user.identity.name}}" style="text-align: right;" disabled></input>
+  </view>
+  <view class="cu-form-group" wx:if="{{user.identity.number}}">
+    <view class="title require">学号</view>
+    <input value="{{user.identity.number}}" style="text-align: right;" disabled></input>
+  </view>
+  <view class="cu-form-group" wx:if="{{user.identity.phone}}">
+    <view class="title require">手机</view>
+    <input value="{{user.identity.phone}}" style="text-align: right;" disabled></input>
+  </view>
+  <view class="cu-form-group" wx:if="{{user.identity.gender}}">
+    <view class="title require">性别</view>
+    <input value="{{user.identity.gender=='male'?'男':user.identity.gender=='female'?'女':'未知'}}" style="text-align: right;" disabled></input>
+  </view>
+  <view class="cu-form-group" wx:if="{{user.identity.email}}">
+    <view class="title">邮箱</view>
+    <input value="{{user.identity.email}}" style="text-align: right;" disabled></input>
+  </view>
+  <view class="cu-form-group" wx:if="{{user.identity.qq}}">
+    <view class="title">QQ</view>
+    <input value="{{user.identity.qq}}" style="text-align: right;" disabled></input>
+  </view>
+  <view class="cu-form-group">
+    <view class="title">身份</view>
+    <input value="{{identity}}" style="text-align: right;color: gray;" disabled></input>
+  </view>
+  <view class="cu-form-group">
+    <view class="title">权限</view>
+    <input type="number" value="{{authority}}" placeholder="{{'权限等级：'+user.identity.authority+'；键入新权限等级以修改'}}" style="text-align: right;" bindchange="authorityChange"></input>
+  </view>
+  <view class="tip">有效范围：大于等于0，小于等于{{au-1}}；建议输入整十数</view>
+  <view class="tip">点击通过：通过审核状态，保存权限修改</view>
+  <view class="tip">点击驳回：驳回审核状态，不保存权限修改</view>
+  <view class="cu-form-group" style="min-height: 0;"></view>
+  <view class="cu-form-group">
+    <button class="cu-btn line-red" style="width: 40%;" bindtap="saveIdentiy" data-t="驳回">驳回</button>
+    <button class="cu-btn line-blue" style="width: 40%;" bindtap="saveIdentiy" data-t="通过">通过</button>
+  </view>
+</form>

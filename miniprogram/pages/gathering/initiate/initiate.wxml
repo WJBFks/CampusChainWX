@@ -1,0 +1,91 @@
+<form bindsubmit="submitForm">
+  <view class="cu-card case no-card">
+    <view class="cu-item shadow">
+      <view class="cu-list menu-avatar">
+        <view class="cu-item">
+          <image src="{{creator.userinfo.avatarUrl}}" class="cu-avatar round lg"></image>
+          <view class="content flex-sub">
+            <view class="text-sm text-grey flex justify-between" style="font-weight: 600;">
+              创建者：{{creator.userinfo.nickName}}
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class="content">
+        <form action="">
+          <view class="cu-form-group">
+            <view class="title required">收集表名</view>
+            <input placeholder="请输入收集表名" name='gathering_name'></input>
+          </view>
+          <view class="cu-form-group time">
+            <view class="title flex" style="height: 100rpx;line-height: 100rpx;">截止时间
+              <switch bindchange="switchChange" class="margin-left"></switch>
+            </view>
+            <view wx:if="{{isDate}}" class="flex" style="height: 100rpx;line-height: 100rpx;">
+              <view class="flex" style="width: 250rpx;">
+                <picker mode="date" value="{{date}}" start="{{date}}" end="2030-12-31" bindchange="DateChange" style="flex: none;">
+                  <view class="picker">
+                    {{date}}
+                  </view>
+                </picker>
+              </view>
+              <view class="flex" style="width: 150rpx;">
+                <picker mode="time" value="{{time}}" name="time" bindchange="TimeChange" style="flex: none;">
+                  <view class="picker">
+                    {{time}}
+                  </view>
+                </picker>
+              </view>
+            </view>
+          </view>
+          <view class="cu-form-group align-start">
+            <view class="title">详细描述</view>
+            <textarea maxlength="-1" bindinput="textareaBInput" placeholder="多行文本输入框" name='gathering_desc'></textarea>
+          </view>
+        </form>
+      </view>
+    </view>
+  </view>
+  <!-- 表项 -->
+  <view class="margin-top"></view>
+  <block wx:for="{{detail}}" wx:for-index="ti" wx:for-item="tt" wx:key="ti">
+    <view class="cu-form-group margin-top" style="font-weight: 600;">
+      <switch class="red sm margin-right" checked="{{tt.required}}" bindchange="switchChange2" id="{{ti}}"></switch>
+      <view class="{{'title ' +(tt.required?'required':'')}}" style="width: 100rpx;">
+        {{ti+1<10?'0'+(ti+1):ti+1}}
+      </view>
+      <input placeholder="请输入表项名" placeholder-style="font-weight: 400;" name='{{"item"+ti}}' class="text-black"></input>
+    </view>
+    <!-- 数值类型 -->
+    <view class="cu-form-group">
+      <text class="title">数值类型</text>
+      <picker bindchange="PickerChange" value="{{tt.type_index}}" range="{{type_picker}}" id="{{ti}}">
+        <view class="picker">
+          {{type_picker[tt.type_index]}}
+        </view>
+      </picker>
+    </view>
+    <!-- 列表类型 -->
+    <view wx:if="{{type_picker[tt.type_index]=='列表'}}" class="cu-form-group">
+      <text class="title">列表类型</text>
+      <picker bindchange="ListPickerChange" value="{{tt.list_type_index}}" range="{{type_picker_list}}" id="{{ti}}">
+        <view class="picker">
+          {{type_picker_list[tt.list_type_index]}}
+        </view>
+      </picker>
+    </view>
+    <view wx:if="{{type_picker[tt.type_index]=='列表'}}" class="cu-form-group">
+      <text class="title">列表项数</text>
+      <input type="number" value="{{tt.list_len}}" placeholder="输入留空表示无限项" id="{{ti}}" bindinput="listLenChange" 
+      bindchange="listReqLen"/>
+    </view>
+    <view wx:if="{{type_picker[tt.type_index]=='列表'}}" class="cu-form-group">
+      <text class="title">必填项数</text>
+      <input type="number" value="{{tt.list_required}}" placeholder="{{'默认：'+(tt.required?(tt.list_len.length==0?1:tt.list_len):0)}}" id="{{ti}}" bindchange="listReqChange" />
+    </view>
+  </block>
+  <view class="cu-form-group margin-top">
+    <button id="submit" form-type="submit" class="cu-btn line-blue shadow" style="width: 40%;">提交</button>
+    <button class="cu-btn bg-blue shadow" style="width: 40%;" bindtap="addDetail">增加表项</button>
+  </view>
+</form>

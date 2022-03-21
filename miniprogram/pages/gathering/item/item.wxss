@@ -1,0 +1,16 @@
+/* pages/gathering/item/item.wxss */
+.cell {
+  display: flex;
+  margin-top: 20rpx;
+}
+
+.cell .item {
+  word-wrap: break-word
+}
+
+.load-tip {
+  width: 100%;
+  text-align: center;
+  font-size: 64rpx;
+  margin-top: 30vh;
+}

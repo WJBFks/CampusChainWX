@@ -1,0 +1,38 @@
+<view class="cu-card case">
+  <block wx:for="{{1}}" wx:key="index">
+    <view class="cu-item shadow" wx:for="{{users}}" wx:key="{{item}}" wx:key="index" id="{{item._id}}" bindtap="toItem">
+      <view class="cu-list menu-avatar">
+        <view class="cu-item" style="height: 136rpx;">
+          <image src="{{item.userinfo.avatarUrl}}" class="cu-avatar round lg"></image>
+          <view class="content flex-sub">
+            <view class="text-black text-lg flex justify-between" style="font-weight: 600;">
+              {{item.userinfo.nickName}}
+            </view>
+            <view wx:if="{{item.identity}}" class="text-red">
+              {{item.identity.status}}
+            </view>
+            <view wx:else class="text-gray">
+              暂未填报
+            </view>
+          </view>
+        </view>
+      </view>
+      <block wx:if="{{item.identity}}">
+        <view class="content padding-left padding-right padding-bottom-sm text-grey">
+          {{item.identity.university}} - {{item.identity.school}} - {{item.identity.grade}} - {{item.identity.major}} -
+          {{item.identity.class}} - {{item.identity.name}}
+        </view>
+        <view wx:if="{{item.identity.status=='审核中'}}" class="content padding-left padding-right padding-bottom-sm flex">
+          <button class="cu-btn line-red" style="width: 40%;" id="{{index}}" catchtap="btn" data-t="驳回">驳回</button>
+          <button class="cu-btn line-blue" style="width: 40%;" id="{{index}}" catchtap="btn" data-t="通过">通过</button>
+        </view>
+        <view wx:elif="{{item.identity.status=='通过'}}" class="content padding-left padding-right padding-bottom-sm flex">
+          <button class="cu-btn line-red" style="width: 89%;" id="{{index}}" catchtap="btn" data-t="驳回">驳回</button>
+        </view>
+        <view wx:elif="{{item.identity.status=='驳回'}}" class="content padding-left padding-right padding-bottom-sm flex">
+          <button class="cu-btn line-blue" style="width: 89%;" id="{{index}}" catchtap="btn" data-t="通过">通过</button>
+        </view>
+      </block>
+    </view>
+  </block>
+</view>

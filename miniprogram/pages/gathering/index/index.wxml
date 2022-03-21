@@ -1,0 +1,29 @@
+<scroll-view scroll-y="true" style="height: calc(100vh - 64rpx);">
+  <view class="cu-card case">
+    <block wx:for="{{1}}" wx:key="index">
+      <view class="cu-item shadow" wx:for="{{gatherings}}" wx:key="{{item}}" wx:key="index" bindtap="selectItem" data-id="{{item.gat_id}}">
+        <view class="cu-list menu-avatar">
+          <view class="cu-item">
+            <image src="{{userInfo[index].avatarUrl}}" class="cu-avatar round lg"></image>
+            <view class="content flex-sub">
+              <view class="text-grey" style="font-weight: 600;">{{item.name}}</view>
+              <view class="text-gray text-sm flex justify-between">
+                {{userInfo[index].nickName}}
+                <view class="text-gray text-sm">
+                  <text wx:if="{{item.time_to}}">{{item.time_from}} to {{item.time_to}}</text>
+                  <text wx:else>{{item.time_from}}</text>
+                </view>
+              </view>
+            </view>
+          </view>
+        </view>
+        <view class="content padding-sm text-grey">
+          {{item.description}}
+        </view>
+      </view>
+    </block>
+  </view>
+</scroll-view>
+<view>
+  <button id="initiate" class="cu-btn bg-blue" bindtap="toInitiate">发起收集表</button>
+</view>

@@ -1,0 +1,14 @@
+/* pages/gathering/initiate/initiate.wxss */
+.required::after{
+  content: '*';
+  color: red;
+  font-weight: bold;
+}
+
+.cu-form-group picker .picker {
+  text-align: left;
+}
+
+.time.cu-form-group picker .picker {
+  text-align: right;
+}

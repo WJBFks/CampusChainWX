@@ -1,0 +1,62 @@
+<view class="cu-card case no-card">
+  <view class="cu-item shadow">
+    <view class="cu-list menu-avatar">
+      <view class="cu-item">
+        <image src="{{creator.userinfo.avatarUrl}}" class="cu-avatar round lg"></image>
+        <view class="content flex-sub">
+          <view class="text-grey" style="font-weight: 600;">{{gathering.name}}</view>
+          <view class="text-gray text-sm flex justify-between">
+            {{creator.userinfo.nickName}}
+            <view wx:if="{{gathering.time_to}}" class="text-gray text-sm">
+              {{gathering.time_from}} to {{gathering.time_to}}
+            </view>
+            <view wx:else class="text-gray text-sm">
+              {{gathering.time_from}}
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="content padding-sm text-grey">
+      {{gathering.description}}
+    </view>
+  </view>
+</view>
+
+<form bindsubmit="submitForm">
+  <view class="margin-top">
+    <block wx:for="{{tv}}" wx:for-index="ti" wx:for-item="tt" wx:for-key="ti">
+      <view wx:if="{{types[ti].type=='string'||types[ti].type=='int'||types[ti].type=='float'}}" class="cu-form-group" style="display: block;">
+        <view class="head">
+          <view style="width: 100rpx;">
+            {{ti+1<10?'0'+(ti+1):ti}} </view>
+              <view style="flex: 1;" class="{{types[ti].required>0?'required':''}}">{{head[ti]}}
+              </view>
+          </view>
+          <view wx:for="{{tt}}" wx:for-index="i" class="input content" style="display: flex;">
+            <view class="text-gray" style="width: 100rpx;line-height: 66rpx;">
+              {{types[ti].type=='string'?'字符':types[ti].type=='int'?'整数':types[ti].type=='float'?'实数':''}}
+            </view>
+            <!-- 序号 -->
+            <view wx:if="{{tt.length>1||types[ti].list_len==0}}" style="width: 60rpx;" class="{{i<types[ti].required?'required':''}}">{{i+1}}.</view>
+            <input value="{{tv[ti][i]}}" id="{{ti+'-'+i}}" placeholder="{{i+1>types[ti].required?'键入以添加行':('请输入'+head[ti]+(tt.length>1||types[ti].list_len==0?'-'+(i+1):''))}}" name="{{head[ti]+(tt.length>1||types[ti].list_len==0?'-'+(i+1):'-')}}" style="flex: 1;line-height: 64rpx;" bindchange="inputItem"></input>
+          </view>
+        </view>
+        <view wx:elif="{{types[ti].type=='phone'}}" class="cu-form-group">
+          <view class="title">手机号码</view>
+          <input type="number" placeholder="手机号码" name="phone"></input>
+          <view class="cu-capsule radius">
+            <view class="cu-tag bg-blue">
+              +86
+            </view>
+            <view class="cu-tag line-blue">
+              中国大陆
+            </view>
+          </view>
+        </view>
+    </block>
+  </view>
+  <view class="cu-form-group">
+    <button id="submit" form-type="submit" class="cu-btn bg-blue shadow" style="width: 100%;">提交</button>
+  </view>
+</form>
